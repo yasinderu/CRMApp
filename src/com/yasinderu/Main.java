@@ -6,62 +6,70 @@ import java.util.Scanner;
 
 public class Main {
 
+    private List<Account> accounts = new ArrayList<>();
+    private static List<Lead> leads = new ArrayList<>();
+
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         Scanner index = new Scanner(System.in);
-        String choice = "";
-        List<Lead> lead = new ArrayList<>();
+        String option = "";
 
         System.out.println("Welcome to simple CRM app!!");
         System.out.println("Let's create your first lead");
+        System.out.println("Happy working!!");
 
-        lead.add(new Lead());
+        leads.add(new Lead());
 
-        while (!choice.equals("quit")) {
+        while (!option.equals("quit")) {
 
-            System.out.println("Happy working!!");
             System.out.println("Choose one of the option bellow.");
             System.out.println("1 - Create New Lead \n2 - New Task \n3 - New Event \n4 - Lead Detail");
 
-            choice = in.nextLine();
+            option = in.nextLine();
 
-            switch (choice) {
+            switch (option) {
                 case "1":
-                    lead.add(new Lead());
+                    leads.add(new Lead());
                     System.out.println("New lead created");
                     break;
 
                 case "2":
                     System.out.println("Select lead \n");
 
-                    for (int i = 0; i < lead.size(); i++) {
-                        System.out.println(i + 1 + " : " + lead.get(i).getName());
+                    for (int i = 0; i < leads.size(); i++) {
+                        System.out.println(i + 1 + " : " + leads.get(i).getName());
                     }
 
                     int leadIndex = index.nextInt();
-                    lead.get(leadIndex - 1).newTask();
+                    leads.get(leadIndex - 1).newTask();
                     System.out.println("New Task created!!");
                     break;
 
                 case "3":
                     System.out.println("Select Lead \n");
 
-                    for (int i = 0; i < lead.size(); i++) {
-                        System.out.println(i + 1 + " : " + lead.get(i).getName());
+                    for (int i = 0; i < leads.size(); i++) {
+                        System.out.println(i + 1 + " : " + leads.get(i).getName());
                     }
 
                     int leadInd = index.nextInt();
-                    lead.get(leadInd - 1).newEvent();
+                    leads.get(leadInd - 1).newEvent();
                     System.out.println("New Event created!!");
                     break;
 
                 case "4":
-                    for (int i = 0; i < lead.size(); i++) {
-                        lead.get(i).showInfo();
+                    for (int i = 0; i < leads.size(); i++) {
+                        leads.get(i).showInfo();
                     }
                     break;
+                default:
+                    System.out.println("Please select the right option");
             }
         }
         System.out.println("Thank you, Have a great day !!");
+    }
+
+    public void convertLead(Lead lead) {
+        accounts.add(new Account(lead));
     }
 }

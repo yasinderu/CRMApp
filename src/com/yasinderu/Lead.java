@@ -74,6 +74,18 @@ public class Lead {
         return fullName;
     }
 
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
     public void setLeadStatus() {
         System.out.print("Change lead status to : ");
         this.leadStatus = in.nextLine();
@@ -88,12 +100,12 @@ public class Lead {
     }
 
     public void showInfo() {
-        System.out.println("Lead Info : \n");
         System.out.println("Name : " + firstName + " " + lastName);
+        System.out.println("Lead ID : " + leadId);
         System.out.println("Company : " + companyName);
         System.out.println("Email : " + email);
         System.out.println("Phone Number : " + phoneNumber);
-        System.out.println("Lead Status : " + leadStatus "\n");
+        System.out.println("Lead Status : " + leadStatus + "\n");
         System.out.println("Activity \n");
 
         if (!task.isEmpty()) {
