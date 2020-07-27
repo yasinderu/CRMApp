@@ -9,6 +9,7 @@ public class Opportunity {
     private String accountName;
     private String closeDate;
     private String stage;
+    private String lostReason;
     private double amount;
 
     private List<Task> tasks;
@@ -58,7 +59,12 @@ public class Opportunity {
             case "c":
                 this.stage = "Negotiation";
                 break;
+
+            default:
+                this.stage = "Qualification";
         }
+
+        System.out.println("Current stage is " + stage);
     }
 
     public void setAmount() {
@@ -89,6 +95,22 @@ public class Opportunity {
         events.add(new Event(contacts.get(contactInd).getName()));
     }
 
+    public void selectClosedStage() {
+        System.out.println("1 - Closed Won | 2 - Closed Lost");
+        System.out.print("Select Closed stage : ");
+        String option = in.nextLine();
+
+        if (option.equals("1")) {
+            this.stage = "Closed Won";
+        }
+
+        if (option.equals("2")) {
+            this.stage = "Closed Lost";
+            System.out.print("Lost Reason : ");
+            this.lostReason = in.nextLine();
+        }
+    }
+
     public void showInfo() {
         System.out.println("Details.");
         System.out.println("Opportunity Name : " + opName);
@@ -96,6 +118,10 @@ public class Opportunity {
         System.out.println("Close Date : " + closeDate);
         System.out.println("Stage : " + stage);
         System.out.println("Amount : $" + amount);
+
+        if (!this.lostReason.isEmpty()) {
+            System.out.println("Lost Reason : " + lostReason);
+        }
 
         System.out.println("\n Activities. \n");
         System.out.println("Events. \n");

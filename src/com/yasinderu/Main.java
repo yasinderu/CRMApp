@@ -62,9 +62,6 @@ public class Main {
                             leads.remove(leadId);
                             break;
 
-                        case "d":
-                            break;
-
                         default:
                             System.out.println("Please choose from the available option");
                             break;
@@ -73,6 +70,8 @@ public class Main {
             }
 
             if (option.equals("3")) {
+                option = in.nextLine();
+
                 if (!opportunities.isEmpty()) {
                     for (int i = 0; i < opportunities.size(); i++) {
                         System.out.println(i + 1 + " - " + opportunities.get(i).getOpName());
@@ -81,12 +80,45 @@ public class Main {
                     System.out.println("Select Opportunity : ");
                     int opId = in.nextInt() - 1;
                     opportunities.get(opId).showInfo();
+
+                    while (!option.equals("f")) {
+                        System.out.println(
+                                "a - Create new event | b - Create new Task \n c - Set Stage | d - Close Opportunity \n e - Set Amount | f - Back");
+                        System.out.print("Select one of the option above : ");
+                        option = in.nextLine();
+
+                        switch (option) {
+                            case "a":
+                                opportunities.get(opId).newEvent();
+                                System.out.println("Event created !!");
+                                break;
+
+                            case "b":
+                                opportunities.get(opId).newTask();
+                                System.out.println("Task created !!");
+                                break;
+
+                            case "c":
+                                opportunities.get(opId).setStage();
+                                break;
+
+                            case "d":
+                                opportunities.get(opId).selectClosedStage();
+
+                                break;
+
+                            default:
+                                System.out.println("Please choose from the available option");
+                                break;
+                        }
+                    }
                 } else {
                     System.out.println("You have no opportunites");
                 }
             }
         }
         System.out.println("Thank you, Have a great day !!");
+        in.close();
     }
 
     public static void convertLead(Lead lead) {
@@ -94,6 +126,11 @@ public class Main {
         contacts.add(new Contact(lead));
         opportunities.add(new Opportunity(lead, contacts));
 
+        System.out.println("Lead Successfully converted !!");
         System.out.println("New Account, New Contact, and New Opportunity has been created");
+    }
+
+    public static void createReport(List<Opportunity> opportunities) {
+        Report report = new Report(opportunities);
     }
 }
