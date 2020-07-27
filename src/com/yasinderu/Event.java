@@ -5,14 +5,14 @@ import java.util.Scanner;
 public class Event {
     private String subject;
     private String description;
-    private String leadName;
+    private String name;
     private String startDate;
     private String endDate;
 
     Scanner in = new Scanner(System.in);
 
     public Event(String name) {
-        this.leadName = name;
+        this.name = name;
         setSubject();
         setDescription();
         setDate();
@@ -40,7 +40,7 @@ public class Event {
         System.out.println("Description : " + description);
         System.out.println("Start Date : " + startDate);
         System.out.println("End Date : " + endDate);
-        System.out.println("Lead Name : " + leadName);
+        System.out.println("Lead Name : " + name);
         System.out.println(" ");
     }
 }

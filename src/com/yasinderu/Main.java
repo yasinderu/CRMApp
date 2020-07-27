@@ -7,11 +7,12 @@ import java.util.Scanner;
 public class Main {
 
     private static List<Account> accounts = new ArrayList<>();
+    private static List<Contact> contacts = new ArrayList<>();
     private static List<Lead> leads = new ArrayList<>();
+    private static List<Opportunity> opportunities = new ArrayList<>();
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        Scanner index = new Scanner(System.in);
         String option = "";
 
         System.out.println("Welcome to simple CRM app!!");
@@ -23,7 +24,7 @@ public class Main {
         while (!option.equals("quit")) {
 
             System.out.println("Choose one of the option bellow. \n");
-            System.out.println("1 - Create New Lead \n2 - Show available leads");
+            System.out.println("1 - Create New Lead \n2 - Show Leads \n3 - Show Opportunities");
 
             option = in.nextLine();
 
@@ -37,7 +38,7 @@ public class Main {
                     System.out.println(i + 1 + " - " + leads.get(i).getName());
                 }
                 System.out.print("Select Lead : ");
-                int leadId = index.nextInt() - 1;
+                int leadId = in.nextInt() - 1;
                 leads.get(leadId).showInfo();
 
                 while (!option.equals("d")) {
@@ -70,11 +71,29 @@ public class Main {
                     }
                 }
             }
+
+            if (option.equals("3")) {
+                if (!opportunities.isEmpty()) {
+                    for (int i = 0; i < opportunities.size(); i++) {
+                        System.out.println(i + 1 + " - " + opportunities.get(i).getOpName());
+                    }
+
+                    System.out.println("Select Opportunity : ");
+                    int opId = in.nextInt() - 1;
+                    opportunities.get(opId).showInfo();
+                } else {
+                    System.out.println("You have no opportunites");
+                }
+            }
         }
         System.out.println("Thank you, Have a great day !!");
     }
 
     public static void convertLead(Lead lead) {
         accounts.add(new Account(lead));
+        contacts.add(new Contact(lead));
+        opportunities.add(new Opportunity(lead, contacts));
+
+        System.out.println("New Account, New Contact, and New Opportunity has been created");
     }
 }

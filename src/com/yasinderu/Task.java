@@ -5,12 +5,12 @@ import java.util.Scanner;
 public class Task {
     private String subject;
     private String dueDate;
-    private String leadName;
+    private String name;
 
     Scanner in = new Scanner(System.in);
 
     public Task(String name) {
-        this.leadName = name;
+        this.name = name;
         setSubject();
         setDueDate();
     }
@@ -28,7 +28,7 @@ public class Task {
     public void showInfo() {
         System.out.println("Subject : " + subject);
         System.out.println("Due Date : " + dueDate);
-        System.out.println("Lead Name : " + leadName);
+        System.out.println("Lead Name : " + name);
         System.out.println(" ");
     }
 }
