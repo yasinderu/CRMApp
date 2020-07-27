@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Main {
 
-    private List<Account> accounts = new ArrayList<>();
+    private static List<Account> accounts = new ArrayList<>();
     private static List<Lead> leads = new ArrayList<>();
 
     public static void main(String[] args) {
@@ -22,54 +22,59 @@ public class Main {
 
         while (!option.equals("quit")) {
 
-            System.out.println("Choose one of the option bellow.");
-            System.out.println("1 - Create New Lead \n2 - New Task \n3 - New Event \n4 - Lead Detail");
+            System.out.println("Choose one of the option bellow. \n");
+            System.out.println("1 - Create New Lead \n2 - Show available leads");
 
             option = in.nextLine();
 
-            switch (option) {
-                case "1":
-                    leads.add(new Lead());
-                    System.out.println("New lead created");
-                    break;
+            if (option.equals("1")) {
+                leads.add(new Lead());
+                System.out.println("New lead created");
+            }
 
-                case "2":
-                    System.out.println("Select lead \n");
+            if (option.equals("2")) {
+                for (int i = 0; i < leads.size(); i++) {
+                    System.out.println(i + 1 + " - " + leads.get(i).getName());
+                }
+                System.out.print("Select Lead : ");
+                int leadId = index.nextInt() - 1;
+                leads.get(leadId).showInfo();
 
-                    for (int i = 0; i < leads.size(); i++) {
-                        System.out.println(i + 1 + " : " + leads.get(i).getName());
+                while (!option.equals("d")) {
+                    System.out.println("a - Create new event | b - Create new Task | c - Convert Lead | d - Back");
+                    System.out.print("Select one of the option above : ");
+                    option = in.nextLine();
+
+                    switch (option) {
+                        case "a":
+                            leads.get(leadId).newEvent();
+                            System.out.println("New Event Created !!");
+                            break;
+
+                        case "b":
+                            leads.get(leadId).newTask();
+                            System.out.println("New Task Created !!");
+                            break;
+
+                        case "c":
+                            convertLead(leads.get(leadId));
+                            leads.remove(leadId);
+                            break;
+
+                        case "d":
+                            break;
+
+                        default:
+                            System.out.println("Please choose from the available option");
+                            break;
                     }
-
-                    int leadIndex = index.nextInt();
-                    leads.get(leadIndex - 1).newTask();
-                    System.out.println("New Task created!!");
-                    break;
-
-                case "3":
-                    System.out.println("Select Lead \n");
-
-                    for (int i = 0; i < leads.size(); i++) {
-                        System.out.println(i + 1 + " : " + leads.get(i).getName());
-                    }
-
-                    int leadInd = index.nextInt();
-                    leads.get(leadInd - 1).newEvent();
-                    System.out.println("New Event created!!");
-                    break;
-
-                case "4":
-                    for (int i = 0; i < leads.size(); i++) {
-                        leads.get(i).showInfo();
-                    }
-                    break;
-                default:
-                    System.out.println("Please select the right option");
+                }
             }
         }
         System.out.println("Thank you, Have a great day !!");
     }
 
-    public void convertLead(Lead lead) {
+    public static void convertLead(Lead lead) {
         accounts.add(new Account(lead));
     }
 }
