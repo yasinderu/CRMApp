@@ -104,7 +104,6 @@ public class Main {
 
                             case "d":
                                 opportunities.get(opId).selectClosedStage();
-
                                 break;
 
                             default:

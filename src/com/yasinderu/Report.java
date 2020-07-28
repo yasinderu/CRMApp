@@ -8,4 +8,10 @@ public class Report {
     public Report(List<Opportunity> opportunities) {
         this.opportunities = opportunities;
     }
+
+    public void showDetail() {
+        for (int i = 0; i < opportunities.size(); i++) {
+            opportunities.get(i).showInfo();
+        }
+    }
 }

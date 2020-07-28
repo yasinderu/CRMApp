@@ -14,6 +14,7 @@ public class Opportunity {
 
     private List<Task> tasks;
     private List<Event> events;
+    private List<Note> notes;
 
     private List<Contact> contacts;
 
@@ -30,6 +31,7 @@ public class Opportunity {
 
         this.tasks = new ArrayList<>();
         this.events = new ArrayList<>();
+        this.notes = new ArrayList<>();
     }
 
     private void setOpName() {
@@ -75,6 +77,11 @@ public class Opportunity {
 
     public String getOpName() {
         return opName;
+    }
+
+    public void createNote() {
+        notes.add(new Note());
+        System.out.println("Note Created !!");
     }
 
     public void newTask() {
