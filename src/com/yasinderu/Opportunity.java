@@ -11,6 +11,7 @@ public class Opportunity {
     private String stage;
     private String lostReason;
     private double amount;
+    private boolean lost;
 
     private List<Task> tasks;
     private List<Event> events;
@@ -26,6 +27,7 @@ public class Opportunity {
         this.closeDate = "";
         this.stage = "Qualification";
         this.amount = 0;
+        this.lost = false;
 
         this.contacts = contacts;
 
@@ -115,7 +117,12 @@ public class Opportunity {
             this.stage = "Closed Lost";
             System.out.print("Lost Reason : ");
             this.lostReason = in.nextLine();
+            this.lost = true;
         }
+    }
+
+    public boolean isLost() {
+        return lost;
     }
 
     public void showInfo() {

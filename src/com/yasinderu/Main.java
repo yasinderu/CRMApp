@@ -81,9 +81,9 @@ public class Main {
                     int opId = in.nextInt() - 1;
                     opportunities.get(opId).showInfo();
 
-                    while (!option.equals("f")) {
+                    while (!option.equals("back")) {
                         System.out.println(
-                                "a - Create new event | b - Create new Task \n c - Set Stage | d - Close Opportunity \n e - Set Amount | f - Back");
+                                "a - Create new event | b - Create new Task \n c - Set Stage | d - Close Opportunity \n e - Set Amount | f - New Note");
                         System.out.print("Select one of the option above : ");
                         option = in.nextLine();
 
@@ -104,6 +104,10 @@ public class Main {
 
                             case "d":
                                 opportunities.get(opId).selectClosedStage();
+                                break;
+
+                            case "f":
+                                opportunities.get(opId).createNote();
                                 break;
 
                             default:
