@@ -13,6 +13,8 @@ public class Opportunity {
     private double amount;
     private boolean lost;
 
+    private User user;
+
     private List<Task> tasks;
     private List<Event> events;
     private List<Note> notes;
@@ -21,13 +23,15 @@ public class Opportunity {
 
     Scanner in = new Scanner(System.in);
 
-    public Opportunity(Lead lead, List<Contact> contacts) {
+    public Opportunity(Lead lead, List<Contact> contacts, User user) {
         setOpName();
         this.accountName = lead.getCompanyName();
         this.closeDate = "";
         this.stage = "Qualification";
         this.amount = 0;
         this.lost = false;
+
+        this.user = user;
 
         this.contacts = contacts;
 
@@ -111,6 +115,7 @@ public class Opportunity {
 
         if (option.equals("1")) {
             this.stage = "Closed Won";
+            this.lost = false;
         }
 
         if (option.equals("2")) {
@@ -147,5 +152,7 @@ public class Opportunity {
         for (int i = 0; i < tasks.size(); i++) {
             tasks.get(i).showInfo();
         }
+
+        System.out.println("Opportunity owner : " + user.getName());
     }
 }

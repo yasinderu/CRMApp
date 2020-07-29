@@ -9,23 +9,24 @@ public class Report {
     private List<Opportunity> opLost;
     private List<Opportunity> opWon;
 
-    public Report(List<Opportunity> opportunities) {
+    public Report() {
+        this.opportunities = new ArrayList<>();
         this.opLost = new ArrayList<>();
         this.opWon = new ArrayList<>();
-        this.opportunities = opportunities;
     }
 
-    public void showDetail() {
+    private void clusterOpportunities() {
         for (int i = 0; i < opportunities.size(); i++) {
-            opportunities.get(i).showInfo();
+            if (opportunities.get(i).isLost()) {
+                opLost.add(opportunities.get(i));
+            } else {
+                opWon.add(opportunities.get(i));
+            }
         }
     }
 
-    public void addOpportunityLost(Opportunity opLost) {
-        this.opLost.add(opLost);
-    }
-
-    public void addOpportunityWon(Opportunity opWon) {
-        this.opWon.add(opWon);
+    public void addNewReport(Opportunity opp) {
+        opportunities.add(opp);
+        clusterOpportunities();
     }
 }

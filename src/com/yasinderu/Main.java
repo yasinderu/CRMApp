@@ -10,8 +10,14 @@ public class Main {
     private static List<Contact> contacts = new ArrayList<>();
     private static List<Lead> leads = new ArrayList<>();
     private static List<Opportunity> opportunities = new ArrayList<>();
+    private static User user;
 
     public static void main(String[] args) {
+
+        System.out.println("Let's create new user.");
+        user = new User();
+
+        Report report = new Report();
         Scanner in = new Scanner(System.in);
         String option = "";
 
@@ -104,6 +110,7 @@ public class Main {
 
                             case "d":
                                 opportunities.get(opId).selectClosedStage();
+                                report.addNewReport(opportunities.get(opId));
                                 break;
 
                             case "f":
@@ -127,13 +134,9 @@ public class Main {
     public static void convertLead(Lead lead) {
         accounts.add(new Account(lead));
         contacts.add(new Contact(lead));
-        opportunities.add(new Opportunity(lead, contacts));
+        opportunities.add(new Opportunity(lead, contacts, user));
 
         System.out.println("Lead Successfully converted !!");
         System.out.println("New Account, New Contact, and New Opportunity has been created");
-    }
-
-    public static void createReport(List<Opportunity> opportunities) {
-        Report report = new Report(opportunities);
     }
 }
