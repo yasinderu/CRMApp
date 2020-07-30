@@ -130,6 +130,10 @@ public class Opportunity {
         return lost;
     }
 
+    public double getAmount() {
+        return amount;
+    }
+
     public void showInfo() {
         System.out.println("Details.");
         System.out.println("Opportunity Name : " + opName);
